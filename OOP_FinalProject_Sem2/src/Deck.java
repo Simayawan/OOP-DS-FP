@@ -43,5 +43,6 @@ public class Deck {
     public void reset(){ //reset the deck
         this.currentDeck.clear();
         this.currentDeck.addAll(Arrays.asList(deck));
+        this.shuffle();
     }
 }
