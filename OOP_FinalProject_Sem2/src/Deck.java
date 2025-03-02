@@ -15,14 +15,14 @@ public class Deck {
         this.currentDeck.addAll(Arrays.asList(deck));
     }
     //getter
-    public ArrayList<String> print(){
+    public ArrayList<String> print(){ //return list of card in deck
         return this.currentDeck;
     }
     //methods
     private void remove(String card){ //remove specific card
         this.currentDeck.remove(card);
     }
-    public String draw(){
+    public String draw(){ //draw 1 card
         int index = random.nextInt(this.currentDeck.size());
         String drawnCard = this.currentDeck.get(index);
         this.remove(drawnCard);
