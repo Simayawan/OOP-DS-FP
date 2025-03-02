@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Random;
+import java.util.*;
 
 public class Deck {
     //initialize
@@ -26,6 +23,14 @@ public class Deck {
     }
     private void shuffle() { //shuffle card in deck for more rng
         Collections.shuffle(this.currentDeck);
+    }
+    public boolean higher(String x, String y) { //check x is higher than y
+        Dictionary<String, Integer> ranking = new Hashtable<>();
+        ranking.put("dd",1);
+        ranking.put("cr",2);
+        ranking.put("ht",3);
+        ranking.put("cb",4);
+        return ranking.get(x) > ranking.get(y); //help me with the if same condition
     }
     public String draw(){ //draw 1 card
         int index = random.nextInt(this.currentDeck.size());
