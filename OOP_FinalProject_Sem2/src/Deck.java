@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Random;
 
 public class Deck {
@@ -12,15 +13,19 @@ public class Deck {
     protected Random random = new Random();
 
     public Deck() {
-        this.currentDeck.addAll(Arrays.asList(deck));
+        this.currentDeck.addAll(Arrays.asList(this.deck));
+        this.shuffle();
     }
     //getter
-    public ArrayList<String> print(){ //return list of card in deck
+    public ArrayList<String> print(){ //print list of card in deck
         return this.currentDeck;
     }
     //methods
     private void remove(String card){ //remove specific card
         this.currentDeck.remove(card);
+    }
+    private void shuffle() { //shuffle card in deck for more rng
+        Collections.shuffle(this.currentDeck);
     }
     public String draw(){ //draw 1 card
         int index = random.nextInt(this.currentDeck.size());
@@ -28,14 +33,14 @@ public class Deck {
         this.remove(drawnCard);
         return drawnCard;
     }
-    public String[] draw(int numOfCard){
+    public String[] draw(int numOfCard){ //draw x number of card
         String[] temp = new String[numOfCard];
         for (int i=0; i<numOfCard ; i++) {
             temp[i] = draw();
         }
         return temp;
     }
-    public void reset(){
+    public void reset(){ //reset the deck
         this.currentDeck.clear();
         this.currentDeck.addAll(Arrays.asList(deck));
     }
