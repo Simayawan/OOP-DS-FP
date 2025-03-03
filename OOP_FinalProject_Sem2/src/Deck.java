@@ -3,14 +3,14 @@ import java.util.*;
 public class Deck {
     //initialize
     private ArrayList<String> currentDeck = new ArrayList<String>();
-    protected String[] deck = {"cb2","cb3","cb4","cb5","cb6","cb7","cb8","cb9","cb10","cbJ","cbQ","cbK","cbA",//club
+    private final String[] deck = {"cb2","cb3","cb4","cb5","cb6","cb7","cb8","cb9","cb10","cbJ","cbQ","cbK","cbA",//club
                                "ht2","ht3","ht4","ht5","ht6","ht7","ht8","ht9","ht10","htJ","htQ","htK","htA",//heart
                                "cr2","cr3","cr4","cr5","cr6","cr7","cr8","cr9","cr10","crJ","crQ","crK","crA",//clover
                                "dd2","dd3","dd4","dd5","dd6","dd7","dd8","dd9","dd10","ddJ","ddQ","ddK","ddA"};//diamond
     protected Random random = new Random();
 
     public Deck() {
-        this.currentDeck.addAll(Arrays.asList(this.deck));
+        this.currentDeck.addAll(Arrays.asList(deck));
         this.shuffle();
     }
     //getter
@@ -38,10 +38,10 @@ public class Deck {
         this.remove(drawnCard);
         return drawnCard;
     }
-    public String[] draw(int numOfCard){ //draw x number of card
-        String[] temp = new String[numOfCard];
+    public ArrayList<String> draw(int numOfCard){ //draw x number of card
+        ArrayList<String> temp = new ArrayList<String>();
         for (int i=0; i<numOfCard ; i++) {
-            temp[i] = draw();
+            temp.add(draw());
         }
         return temp;
     }
