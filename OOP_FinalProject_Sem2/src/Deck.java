@@ -14,8 +14,12 @@ public class Deck {
         this.shuffle();
     }
     //getter
-    public ArrayList<String> print(){ //print list of card in deck
-        return this.currentDeck;
+    public ArrayList<String> getDeck() {
+        return currentDeck;
+    }
+    //printing deck
+    public String toString() {
+        return currentDeck+"";
     }
     //methods
     private void remove(String card){ //remove specific card
