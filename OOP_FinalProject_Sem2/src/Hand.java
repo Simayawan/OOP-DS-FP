@@ -24,14 +24,14 @@ public class Hand {
         this.currentHand.addAll(Arrays.asList(card));
         this.numOfCard += 1;
     }
+
+    //remove card from hand
     public void removeCard(String card){
         if (this.currentHand.contains(card)) {
             this.currentHand.remove(card);
             this.numOfCard -= 1;
         }
     }
-
-    //remove card from hand
     public void removeCard(String[] card){
         boolean have = true;
         for (String i : card) {
