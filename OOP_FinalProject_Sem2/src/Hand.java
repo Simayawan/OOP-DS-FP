@@ -47,4 +47,10 @@ public class Hand {
             }
         }
     }
+    public void resetHand() {
+        if (!this.currentHand.isEmpty()) {
+            this.currentHand.removeAll(this.currentHand);
+            this.numOfCard = 0;
+        }
+    }
 }
