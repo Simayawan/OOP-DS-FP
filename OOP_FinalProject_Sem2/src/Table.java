@@ -1,12 +1,11 @@
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.util.*;
 
 public class Table {
     private Deck deck;
     private Player[] players;
     private int[] ranking;
 
+    //constructor
     public Table(int numPlayer) {
         deck = new Deck();
         players = new Player[numPlayer];
@@ -16,17 +15,27 @@ public class Table {
             ranking[i] = i;
         }
     }
-
-    public boolean higherSuit(String x, String y) { //check x is higher than y
-        Dictionary<String, Integer> ranking = new Hashtable<>();
+    public Table() {
+        deck = new Deck();
+        players = new Player[2];
+        ranking = new int[2];
+        for (int i = 0; i < 2; i ++) {
+            players[i] = new Player();
+            ranking[i] = i;
+        }
+    }
+    
+    //methods
+    private int suitDecode(String x) { //get the suit value
+        Map<String, Integer> ranking = new HashMap<>();
         ranking.put("dd",1);
         ranking.put("cr",2);
         ranking.put("ht",3);
         ranking.put("cb",4);
-        return ranking.get(x) > ranking.get(y); //help me with the if same condition
+        return ranking.get(x); //help me with the if same condition
     }
-    public boolean higherNumber(String x, String y) {
-        Dictionary<String, Integer> pic = new Hashtable<>();
+    private int valueDecode(String x) { //get the card value
+        Map<String, Integer> pic = new HashMap<>();
         pic.put("2",2);
         pic.put("3",3);
         pic.put("4",4);
@@ -40,9 +49,17 @@ public class Table {
         pic.put("Q",12);
         pic.put("K",13);
         pic.put("A",14);
-        return true;
+        return pic.get(x);
+    }
+    public int[] cardDecoder(String code) { //turn code to usable value
+        String[] split = code.split("\\|");
+        int[] result = new int[2];
+        result[0] = suitDecode(split[0]);
+        result[1] = valueDecode(split[1]);
+        return result;
     }
 
+    //testing
     public void showRanking() {
         for (int i : ranking) {
             System.out.println(i + ". " + players[i]);

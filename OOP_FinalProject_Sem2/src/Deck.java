@@ -3,10 +3,10 @@ import java.util.*;
 public class Deck {
     //initialize
     private ArrayList<String> currentDeck = new ArrayList<String>();
-    private final String[] deck = {"cb2","cb3","cb4","cb5","cb6","cb7","cb8","cb9","cb10","cbJ","cbQ","cbK","cbA",//club
-                               "ht2","ht3","ht4","ht5","ht6","ht7","ht8","ht9","ht10","htJ","htQ","htK","htA",//heart
-                               "cr2","cr3","cr4","cr5","cr6","cr7","cr8","cr9","cr10","crJ","crQ","crK","crA",//clover
-                               "dd2","dd3","dd4","dd5","dd6","dd7","dd8","dd9","dd10","ddJ","ddQ","ddK","ddA"};//diamond
+    private final String[] deck = {"cb|2","cb|3","cb|4","cb|5","cb|6","cb|7","cb|8","cb|9","cb|10","cb|J","cb|Q","cb|K","cb|A",//club
+                               "ht|2","ht|3","ht|4","ht|5","ht|6","ht|7","ht|8","ht|9","ht|10","ht|J","ht|Q","ht|K","ht|A",//heart
+                               "cr|2","cr|3","cr|4","cr|5","cr|6","cr|7","cr|8","cr|9","cr|10","cr|J","cr|Q","cr|K","cr|A",//clover
+                               "dd|2","dd|3","dd|4","dd|5","dd|6","dd|7","dd|8","dd|9","dd|10","dd|J","dd|Q","dd|K","dd|A"};//diamond
     protected Random random = new Random();
 
     public Deck() {

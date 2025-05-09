@@ -13,6 +13,6 @@ public class Main {
 //        test.resetHand();
 //        System.out.println(test);
         Table test = new Table(2);
-        test.showRanking();
+        System.out.println(Arrays.toString(test.cardDecoder("dd|2")));
     }
 }
