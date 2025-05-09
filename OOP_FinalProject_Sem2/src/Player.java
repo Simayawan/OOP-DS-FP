@@ -65,4 +65,9 @@ public class Player{
     public void removeHand() {
         this.hand.resetHand();
     }
+
+    //display test
+    public String toString() {
+        return "Player(Money: " + money + ")";
+    }
 }

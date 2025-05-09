@@ -7,10 +7,12 @@ public class Main {
 //        System.out.println(deck);
 //        System.out.println(deck.draw(5));
 //        System.out.println(deck);
-        Hand test = new Hand();
-        test.addCard("e1");
-        System.out.println(test);
-        test.resetHand();
-        System.out.println(test);
+//        Hand test = new Hand();
+//        test.addCard("e1");
+//        System.out.println(test);
+//        test.resetHand();
+//        System.out.println(test);
+        Table test = new Table(2);
+        test.showRanking();
     }
 }

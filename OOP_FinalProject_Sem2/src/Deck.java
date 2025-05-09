@@ -28,31 +28,6 @@ public class Deck {
     private void shuffle() { //shuffle card in deck for more rng
         Collections.shuffle(this.currentDeck);
     }
-    public boolean higherSuit(String x, String y) { //check x is higher than y
-        Dictionary<String, Integer> ranking = new Hashtable<>();
-        ranking.put("dd",1);
-        ranking.put("cr",2);
-        ranking.put("ht",3);
-        ranking.put("cb",4);
-        return ranking.get(x) > ranking.get(y); //help me with the if same condition
-    }
-    public boolean higherNumber(String x, String y) {
-        Dictionary<String, Integer> pic = new Hashtable<>();
-        pic.put("2",2);
-        pic.put("3",3);
-        pic.put("4",4);
-        pic.put("5",5);
-        pic.put("6",6);
-        pic.put("7",7);
-        pic.put("8",8);
-        pic.put("9",9);
-        pic.put("10",10);
-        pic.put("J",11);
-        pic.put("Q",12);
-        pic.put("K",13);
-        pic.put("A",14);
-        return true;
-    }
     public String draw(){ //draw 1 card
         int index = random.nextInt(this.currentDeck.size());
         String drawnCard = this.currentDeck.get(index);
