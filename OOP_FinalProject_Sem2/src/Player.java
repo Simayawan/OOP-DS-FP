@@ -29,6 +29,9 @@ public class Player{
     public void removeMoney(double amount) {
         this.money -= amount;
     }
+    public double getMoney(){
+        return this.money;
+    }
 
     //bet
     public boolean addBet(double amount) {

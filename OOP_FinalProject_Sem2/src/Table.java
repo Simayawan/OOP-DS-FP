@@ -59,6 +59,37 @@ public class Table {
         return result;
     }
 
+    //update the ranking
+    public void updateRanking() {
+        for (int i=0; i< ranking.length-1;i++) {
+            int max = ranking[i];
+            for (int j=i+1;j< ranking.length;j++) {
+                if (players[max].getMoney() < players[j].getMoney()) {
+                    max = ranking[i];
+                    int temp = ranking[i];
+                    ranking[i] = ranking[j];
+                    ranking[j] = temp;
+                }
+            }
+        }
+    }
+
+    //bet
+    public boolean addBet(int player,double amount) {
+        return players[player].addBet(amount);
+    }
+    public void allIn(int player) {
+        players[player].allIn();
+    }
+    public void resetBet(int player) {
+        players[player].resetBet();
+    }
+
+    //add money
+    public void addMoney(int player, double amount) {
+        players[player].addMoney(amount);
+    }
+
     //testing
     public void showRanking() {
         for (int i : ranking) {
