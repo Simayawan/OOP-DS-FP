@@ -1,18 +1,26 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        Deck deck = new Deck();
-//        Deck deck2 = new Deck();
-//        System.out.println(deck);
-//        System.out.println(deck.draw(5));
-//        System.out.println(deck);
-//        Hand test = new Hand();
-//        test.addCard("e1");
-//        System.out.println(test);
-//        test.resetHand();
-//        System.out.println(test);
-        Table test = new Table(2);
-        System.out.println(Arrays.toString(test.cardDecoder("dd|2")));
+        Scanner scr = new Scanner(System.in);
+
+        boolean running = true;
+
+        while(running){
+            System.out.println("[1]Play");
+            System.out.println("[2]Quit");
+
+            String input = scr.nextLine();
+
+            switch(input){
+                case "1":
+                    System.out.println("Insert game is running");
+                    break;
+                case "2":
+                    System.out.println("Session Ended");
+                    running = false;
+            }
+        }
     }
 }
