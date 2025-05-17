@@ -30,6 +30,10 @@ public class Player{
         this.money -= amount;
     }
 
+    public double getMoney(){
+        return this.money;
+    }
+
     //bet
     public boolean addBet(double amount) {
         if (amount <= this.money) {
