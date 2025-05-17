@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Player{
     private boolean fold;
     private double money;
@@ -57,13 +59,19 @@ public class Player{
     public void resetFold() {
         fold = false;
     }
+    public boolean getFold() {
+        return fold;
+    }
 
     //interact with hand
     public Hand getHand() {
         return hand;
     }
-    public void addCard(String[] cards) {
+    public void addCard(ArrayList<String> cards) {
         this.hand.addCard(cards);
+    }
+    public void addCard(String card) {
+        this.hand.addCard(card);
     }
     public void removeHand() {
         this.hand.resetHand();

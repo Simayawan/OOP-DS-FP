@@ -90,6 +90,32 @@ public class Table {
         players[player].addMoney(amount);
     }
 
+    //fold
+    public void fold(int player) {
+        if (players[player].getFold()) {
+            players[player].resetFold();
+        } else {
+            players[player].fold();
+        }
+    }
+
+    //card related stuff
+    public void drawCard(int player, int amount) {
+        if (amount == 1) {
+            players[player].addCard(deck.draw());
+        } else {
+            players[player].addCard(deck.draw(amount));
+        }
+    }
+    public void removeCard(int player) {
+        players[player].removeHand();
+    }
+
+    //reset deck
+    public void resetDeck() {
+        deck.reset();
+    }
+
     //testing
     public void showRanking() {
         for (int i : ranking) {

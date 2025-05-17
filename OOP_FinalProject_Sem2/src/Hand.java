@@ -20,8 +20,8 @@ public class Hand {
         this.currentHand.add(card);
         this.numOfCard += 1;
     }
-    public void addCard(String[] card){
-        this.currentHand.addAll(Arrays.asList(card));
+    public void addCard(ArrayList<String> card){
+        this.currentHand.addAll(card);
         this.numOfCard += 1;
     }
 
