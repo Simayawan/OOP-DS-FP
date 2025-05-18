@@ -141,7 +141,7 @@ public class CardCompare {
     private boolean fullHouse(List<int[]> hand) {
         int[] num = {0,0,0,0,0,0,0,0,0,0,0,0,0};
         for (int[] i : hand) {
-            num[i[1]] += 1;
+            num[i[1]-2] += 1;
         }
         boolean three = false, two = false;
         for (int i : num) {

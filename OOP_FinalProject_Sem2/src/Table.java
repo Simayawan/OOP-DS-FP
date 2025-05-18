@@ -15,6 +15,7 @@ public class Table {
             players[i] = new Player();
             ranking[i] = i;
         }
+        publicCard = new Hand();
     }
     public Table() {
         deck = new Deck();
@@ -27,41 +28,15 @@ public class Table {
     }
     
     //methods
-    private int suitDecode(String x) { //get the suit value
-        Map<String,Integer> ranking = Map.of(
-                "dd",1,
-                "cb",2,
-                "ht",3,
-                "sp",4
-        );
-        return ranking.get(x);
-    }
-    private int valueDecode(String x) { //get the card value
-        Map<String, Integer> pic = Map.ofEntries(
-            Map.entry("2", 2),
-            Map.entry("3", 3),
-            Map.entry("4", 4),
-            Map.entry("5", 5),
-            Map.entry("6", 6),
-            Map.entry("7", 7),
-            Map.entry("8", 8),
-            Map.entry("9", 9),
-            Map.entry("10",10),
-            Map.entry("J", 11),
-            Map.entry("Q", 12),
-            Map.entry("K", 13),
-            Map.entry("A", 14)
-        );
-        return pic.get(x);
-    }
-    public int[] cardDecoder(String code) { //turn code to usable value (remember, there is no error handling here)
-        String[] split = code.split("\\|");
-        int[] result = new int[2];
-        result[0] = suitDecode(split[0]);
-        result[1] = valueDecode(split[1]);
-        return result;
-    }
 
+    //decide winner
+    public int winner() {
+        if (players.length == 2) {
+            CardCompare compare = new CardCompare(players[0].getHand(), players[1].getHand(), publicCard.getHand());
+            return compare.winner();
+        }
+        return 0;
+    }
     //update the ranking
     public void updateRanking() {
         for (int i=0; i< ranking.length-1;i++) {

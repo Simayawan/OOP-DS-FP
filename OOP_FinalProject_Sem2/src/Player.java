@@ -64,8 +64,8 @@ public class Player{
     }
 
     //interact with hand
-    public Hand getHand() {
-        return hand;
+    public ArrayList<String> getHand() {
+        return hand.getHand();
     }
     public void addCard(ArrayList<String> cards) {
         this.hand.addCard(cards);

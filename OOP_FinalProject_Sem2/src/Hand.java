@@ -15,6 +15,11 @@ public class Hand {
         return ""+this.currentHand;
     }
 
+    //getter
+    public ArrayList<String> getHand() {
+        return this.currentHand;
+    }
+
     //add card to hand
     public void addCard(String card){
         this.currentHand.add(card);
