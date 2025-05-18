@@ -4,6 +4,7 @@ public class Table {
     private Deck deck;
     private Player[] players;
     private int[] ranking;
+    private Hand publicCard;
 
     //constructor
     public Table(int numPlayer) {
@@ -111,6 +112,17 @@ public class Table {
     }
     public void removeCard(int player) {
         players[player].removeHand();
+    }
+
+    //reveal card
+    public void revealCard() {
+        publicCard.addCard(deck.draw());
+    }
+    public void revealCard(int amount) {
+        publicCard.addCard(deck.draw(amount));
+    }
+    public void clearTable() {
+        publicCard.resetHand();
     }
 
     //reset deck
