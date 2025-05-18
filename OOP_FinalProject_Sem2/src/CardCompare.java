@@ -173,6 +173,25 @@ public class CardCompare {
     private boolean straightFlush(List<int[]> hand) {
         return (flush(hand) && straight(hand));
     }
+    private boolean royalFlush(List<int[]> hand) {
+        if (straightFlush(hand)) {
+            List<Integer> cardValue = new ArrayList<>();
+            for (int[] i : hand) {
+                cardValue.add(i[1]);
+            }
+            List<Integer> check = new ArrayList<>() {
+                {
+                    add(10);
+                    add(11);
+                    add(12);
+                    add(13);
+                    add(14);
+                }
+            };
+            return cardValue.contains(check);
+        }
+        return false;
+    }
 
     //get ranking
     private int comboRanking(List<int[]> hand) {
