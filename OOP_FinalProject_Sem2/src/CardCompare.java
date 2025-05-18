@@ -195,6 +195,8 @@ public class CardCompare {
 
     //get ranking
     private int comboRanking(List<int[]> hand) {
+        if (royalFlush(hand))
+            return 10;
         if (straightFlush(hand))
             return 9;
         if (fourOfAKind(hand))
