@@ -139,7 +139,19 @@ public class CardCompare {
         return false;
     }
     private boolean fullHouse(List<int[]> hand) {
-        return false;//WIP
+        int[] num = {0,0,0,0,0,0,0,0,0,0,0,0,0};
+        for (int[] i : hand) {
+            num[i[1]] += 1;
+        }
+        boolean three = false, two = false;
+        for (int i : num) {
+            if (i == 3) {
+                three = true;
+            } else if (i == 2) {
+                two = true;
+            }
+        }
+        return three && two;
     }
     private boolean fourOfAKind(List<int[]> hand) {
         int count = 0;
