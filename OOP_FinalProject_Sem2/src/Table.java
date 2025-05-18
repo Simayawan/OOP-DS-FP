@@ -27,31 +27,33 @@ public class Table {
     
     //methods
     private int suitDecode(String x) { //get the suit value
-        Map<String, Integer> ranking = new HashMap<>();
-        ranking.put("dd",1);
-        ranking.put("cr",2);
-        ranking.put("ht",3);
-        ranking.put("cb",4);
-        return ranking.get(x); //help me with the if same condition
+        Map<String,Integer> ranking = Map.of(
+                "dd",1,
+                "cb",2,
+                "ht",3,
+                "sp",4
+        );
+        return ranking.get(x);
     }
     private int valueDecode(String x) { //get the card value
-        Map<String, Integer> pic = new HashMap<>();
-        pic.put("2",2);
-        pic.put("3",3);
-        pic.put("4",4);
-        pic.put("5",5);
-        pic.put("6",6);
-        pic.put("7",7);
-        pic.put("8",8);
-        pic.put("9",9);
-        pic.put("10",10);
-        pic.put("J",11);
-        pic.put("Q",12);
-        pic.put("K",13);
-        pic.put("A",14);
+        Map<String, Integer> pic = Map.ofEntries(
+            Map.entry("2", 2),
+            Map.entry("3", 3),
+            Map.entry("4", 4),
+            Map.entry("5", 5),
+            Map.entry("6", 6),
+            Map.entry("7", 7),
+            Map.entry("8", 8),
+            Map.entry("9", 9),
+            Map.entry("10",10),
+            Map.entry("J", 11),
+            Map.entry("Q", 12),
+            Map.entry("K", 13),
+            Map.entry("A", 14)
+        );
         return pic.get(x);
     }
-    public int[] cardDecoder(String code) { //turn code to usable value
+    public int[] cardDecoder(String code) { //turn code to usable value (remember, there is no error handling here)
         String[] split = code.split("\\|");
         int[] result = new int[2];
         result[0] = suitDecode(split[0]);

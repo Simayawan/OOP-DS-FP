@@ -5,7 +5,7 @@ public class Deck {
     private ArrayList<String> currentDeck = new ArrayList<String>();
     private final String[] deck = {"cb|2","cb|3","cb|4","cb|5","cb|6","cb|7","cb|8","cb|9","cb|10","cb|J","cb|Q","cb|K","cb|A",//club
                                "ht|2","ht|3","ht|4","ht|5","ht|6","ht|7","ht|8","ht|9","ht|10","ht|J","ht|Q","ht|K","ht|A",//heart
-                               "cr|2","cr|3","cr|4","cr|5","cr|6","cr|7","cr|8","cr|9","cr|10","cr|J","cr|Q","cr|K","cr|A",//clover
+                               "sp|2","sp|3","sp|4","sp|5","sp|6","sp|7","sp|8","sp|9","sp|10","sp|J","sp|Q","sp|K","sp|A",//spade
                                "dd|2","dd|3","dd|4","dd|5","dd|6","dd|7","dd|8","dd|9","dd|10","dd|J","dd|Q","dd|K","dd|A"};//diamond
     protected Random random = new Random();
 
