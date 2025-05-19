@@ -194,7 +194,7 @@ public class CardCompare {
     }
 
     //get ranking
-    private int comboRanking(List<int[]> hand) {
+    private int comboRanking(List<int[]> hand) { // Rank combo
         if (royalFlush(hand))
             return 10;
         if (straightFlush(hand))
@@ -217,13 +217,13 @@ public class CardCompare {
     }
 
     //get winner
-    public int winner() {//can't do tiebreaker rn
+    public int winner() {//output the winner (or 2 if tie)
         int R1 = comboRanking(decodeHand(p1)),R2 = comboRanking(decodeHand(p2));
         if (R1 > R2) {
-            return 0;
-        } else if (R1 < R2){
-            return 1;
-        } 
-        return 2;
+            return 0; // P1 win
+        } else if (R1 < R2) {
+            return 1; // P2 win
+        }
+        return 2; // Tie
     }
 }

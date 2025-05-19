@@ -44,6 +44,9 @@ public class Player{
         }
         return false;
     }
+    public double getBet() {
+        return bet;
+    }
     public void allIn() {
         this.bet += this.money;
         this.money = 0;

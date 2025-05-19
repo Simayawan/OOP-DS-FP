@@ -37,6 +37,7 @@ public class Table {
         }
         return 0;
     }
+
     //update the ranking
     public void updateRanking() {
         for (int i=0; i< ranking.length-1;i++) {
