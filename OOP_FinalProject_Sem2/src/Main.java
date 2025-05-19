@@ -15,7 +15,10 @@ public class Main {
 
             switch(input){
                 case "1":
-                    System.out.println("Insert game is running");
+                   // Boolean round = true
+                    // While (round){
+                        
+                    //}
                     break;
                 case "2":
                     System.out.println("Session Ended");
