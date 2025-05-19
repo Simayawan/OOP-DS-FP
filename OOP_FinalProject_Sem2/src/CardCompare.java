@@ -221,7 +221,9 @@ public class CardCompare {
         int R1 = comboRanking(decodeHand(p1)),R2 = comboRanking(decodeHand(p2));
         if (R1 > R2) {
             return 0;
-        }
-        return 1;
+        } else if (R1 < R2){
+            return 1;
+        } 
+        return 2;
     }
 }
