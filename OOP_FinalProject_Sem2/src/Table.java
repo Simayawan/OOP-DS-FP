@@ -90,6 +90,11 @@ public class Table {
         players[player].removeHand();
     }
 
+        //see hand
+    public ArrayList<String> seeHand(int player) {
+        return players[player].getHand();
+    }
+    
     //reveal card
     public void revealCard() {
         publicCard.addCard(deck.draw());
