@@ -9,7 +9,7 @@ public class Hand {
     }
     public Hand(String[] list) {
         this.currentHand.addAll(Arrays.asList(list));
-        this.numOfCard += 1;
+        this.numOfCard += list.length;
     }
     public String toString() {
         return ""+this.currentHand;
@@ -27,7 +27,7 @@ public class Hand {
     }
     public void addCard(ArrayList<String> card){
         this.currentHand.addAll(card);
-        this.numOfCard += 1;
+        this.numOfCard += card.size();
     }
 
     //remove card from hand

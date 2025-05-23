@@ -28,6 +28,8 @@ public class Deck {
     private void shuffle() { //shuffle card in deck for more rng
         Collections.shuffle(this.currentDeck);
     }
+
+    //draw
     public String draw(){ //draw 1 card
         int index = random.nextInt(this.currentDeck.size());
         String drawnCard = this.currentDeck.get(index);
@@ -41,9 +43,16 @@ public class Deck {
         }
         return temp;
     }
+
+    //reset deck
     public void reset(){ //reset the deck
         this.currentDeck.clear();
         this.currentDeck.addAll(Arrays.asList(deck));
         this.shuffle();
+    }
+    public void resetCheck(int i) {
+        if ((i*2)+5 < currentDeck.size()) {
+            reset();
+        }
     }
 }
