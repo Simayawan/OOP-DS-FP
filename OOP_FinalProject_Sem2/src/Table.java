@@ -60,13 +60,21 @@ public class Table {
     public void allIn(int player) {
         players[player].allIn();
     }
-    public void resetBet(int player) {
-        players[player].resetBet();
+    public void resetBet() {
+        for (int i: ranking) {
+            players[i].resetBet();
+        }
     }
+    public double seeBet(int player) {return players[player].getBet();}
 
     //add money
     public void addMoney(int player, double amount) {
         players[player].addMoney(amount);
+    }
+
+    //see money
+    public double seeMoney(int player){
+        return players[player].getMoney();
     }
 
     //fold
@@ -89,12 +97,18 @@ public class Table {
     public void removeCard(int player) {
         players[player].removeHand();
     }
+    public void resetCheck() {
+        deck.resetCheck(2);
+    }
 
-        //see hand
+    //see hand
     public ArrayList<String> seeHand(int player) {
         return players[player].getHand();
     }
-    
+    public ArrayList<String> seeTable() {
+        return publicCard.getHand();
+    }
+
     //reveal card
     public void revealCard() {
         publicCard.addCard(deck.draw());
