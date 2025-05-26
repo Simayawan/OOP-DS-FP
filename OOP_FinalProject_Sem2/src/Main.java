@@ -3,6 +3,17 @@ import com.sun.jdi.IntegerValue;
 import java.util.Arrays;
 import java.util.Scanner;
 
+enum gameState{ // game states
+    IDLE, //idle state
+    PREFLOP,
+    FLOP,
+    TURN,
+    RIVER,
+    SHOWDOWN,
+    WINNER,
+    NEW_GAME
+}
+
 public class Main {
     public static void main(String[] args) {
         Scanner scr = new Scanner(System.in);
@@ -11,109 +22,100 @@ public class Main {
         table.addMoney(0, 500);
         table.addMoney(1, 500);
 
-        boolean running = true;
+        gameState states = gameState.IDLE;
 
-        while(running) {
-            System.out.println("[1]Play");
-            System.out.println("[2]Quit");
+        boolean gameRunning = true;
 
-            String input = scr.nextLine();
 
-            switch (input) {
-                case "1":
-                    table.resetCheck();
+        while(gameRunning){
+            switch(states) {
+
+                case IDLE:
+
+                    boolean PlayExitOptionRunning = true;
+
+                    while(PlayExitOptionRunning) {
+                        System.out.println("[1]PLay  [2]Exit");
+                        String PlayExitOption = scr.nextLine();
+                        if (PlayExitOption == "1") {
+                            if (table.seeMoney(0) >= 5 && table.seeMoney(1) >= 5) {
+                                states = gameState.PREFLOP;
+                            }
+                        }
+
+                        if (PlayExitOption == "2") {
+                            gameRunning = false;
+                        } else {
+                            System.out.println("Please choose one valid choice");
+                        }
+                    }
+
+                case PREFLOP:
                     table.drawCard(0, 2);
                     table.drawCard(1, 2);
-                    table.revealCard(3);
-
-                    System.out.println(table.seeTable());
-                    System.out.println(table.seeHand(0));
 
                     table.addBet(0, 5);
                     table.addBet(1, 5);
 
-                    double combinedBet = table.seeBet(0) + table.seeBet(1);
+                    System.out.println("Blind: ");
 
+                    System.out.println("Your cards: ");
+                    System.out.println(table.seeHand(0));
 
-                    System.out.println("current pot: " + combinedBet);
+                    System.out.println("[1]Raise  [2]Call [3]Fold");
 
+                    String options = scr.nextLine();
 
-                    System.out.println("[1]Fold [2]Check [3]Raise");
-                    String choice = scr.nextLine();
+                    boolean RaiseCallFoldOptions = true;
 
-                    switch(choice) {
+                    while (RaiseCallFoldOptions) {
+                        switch (options) {
+                            case "1":
 
-                        case "1":
-                            System.out.println("You folded");
-                            table.resetBet();
+                                String raiseOpt = scr.nextLine();
 
-                            table.addMoney(1, combinedBet);
+                                if (Integer.parseInt(raiseOpt) > table.seeMoney(0) || Integer.parseInt(raiseOpt) <= 0) {
+                                    System.out.println("Not enough money");
 
-                            System.out.println("current pot: " + combinedBet);
-                            System.out.println("Your money: " + table.seeMoney(0));
-                            System.out.println("Opponent's money: " + table.seeMoney(1));
-
-                            table.clearTable();
-
-                            table.removeCard(0);
-                            table.removeCard(1);
-
-                            if(table.seeMoney(0) <= 0.0 || table.seeMoney(1) <= 0.0){
-                                running = false;
-                            }
-                            break;
-
-                        case "2":
-                            System.out.println("You checked");
-                            break;
-
-                        case "3":
-                            System.out.println("Input your raise: ");
-                            String raise = scr.nextLine();
-
-                            if (Integer.parseInt(raise) > table.seeMoney(0)) {
-                                System.out.println("Not enough money");
-                                break;
-                            }
-
-                            if (Integer.parseInt(raise) == table.seeMoney(0)) {
-                                System.out.println("All in");
-                                table.addBet(0, Integer.parseInt(raise));
-                                if(table.seeMoney(0) > table.seeMoney(1)){
-                                    System.out.println("Opponent folded!");
-                                    table.addMoney(0, table.seeBet(0) + table.seeBet(1));
-                                    table.clearTable();
-                                    table.removeCard(0);
-                                    table.removeCard(1);
-                                    break;
                                 }
-                                break;
-                            }
+                                if (Integer.parseInt(raiseOpt) == table.seeMoney(0)) {
+                                    System.out.println("All in!");
+                                    //continue later
 
-                            else { //scenario where the ideal raise conditions are met
-                                System.out.println("You Raised");
-                                table.addBet(0, Integer.parseInt(raise));
-                                System.out.println("Opponent called");
-                                table.addBet(1, Integer.parseInt(raise)); //opponent instantly calls
+                                } else {
+                                    table.addBet(0, Integer.parseInt(raiseOpt));
+                                    table.addBet(1, Integer.parseInt(raiseOpt));
+                                    System.out.println("Player 2 called!");
+                                }
 
-                                double currentBet = combinedBet + table.seeBet(0) + table.seeBet(1);
 
-                                System.out.println("Current bet: " + currentBet);
-                                break;
-                            }
+                            case "2":
 
-                        default:
-                            System.out.println("Invalid input");
-                            break;
+
+                            case "3":
+
+
+                            default:
+
+                        }
                     }
 
-                    break;
-                case "2":
-                    System.out.println("Session Ended");
-                    running = false;
+                case FLOP:
+
+                case TURN:
+
+                case RIVER:
+
+                case SHOWDOWN:
+
+                case WINNER:
+
+                case NEW_GAME:
+
             }
         }
     }
 }
+
 
 
