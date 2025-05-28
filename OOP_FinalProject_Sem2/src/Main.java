@@ -1,5 +1,6 @@
 import com.sun.jdi.IntegerValue;
 
+import java.nio.file.ClosedWatchServiceException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -8,10 +9,10 @@ enum gameState{ // To represent game states
     PREFLOP, // first round of betting without table cards being revealed
     FLOP, // second round of betting with 3 cards revealed
     TURN, // third round of betting with 1 more card revealed
-    RIVER, // fourth round of betting with the final card being revelaed
+    RIVER, // fourth round of betting with the final card being reveled
     SHOWDOWN, // the final round where the player and the opponent cards are compared to the table hand
-    WINNER, 
-    NEW_GAME // gives 2 choices, to play again or to quit, but both resets every value to give a clean slate for another game.
+    NEW_GAME, // gives 2 choices, to play again or to quit, but both resets every value to give a clean slate for another game.
+    NEW_GAME_ALL_IN
 }
 
 public class Main {
@@ -57,9 +58,13 @@ public class Main {
                         }
                     }
 
+                    break;
+
                 case PREFLOP:
+                    table.updateRanking();
+
                     //give two cards each for both players
-                    table.drawCard(0, 2); 
+                    table.drawCard(0, 2);
                     table.drawCard(1, 2);
 
                     // makes both players give up 5 each to the bet for the mandatory bet in the beginning of the game
@@ -87,20 +92,26 @@ public class Main {
                                 System.out.println("Input your desired amount to bet: ");
                                 String raiseOpt = scr.nextLine();
 
-                                //makes sure the player doesnt bet more money than what he has and handles negative values
-                                if (Integer.parseInt(raiseOpt) > table.seeMoney(0) || Integer.parseInt(raiseOpt) <= 0) { 
+                                //makes sure the player doesn't bet more money than what he has and handles negative values
+                                if (Integer.parseInt(raiseOpt) > table.seeMoney(0) || Integer.parseInt(raiseOpt) <= 0) {
                                     System.out.println("Not enough money");
 
                                 }
                                 // makes sure that if the player bets all of his money it would initiate an all in
-                                if (Integer.parseInt(raiseOpt) == table.seeMoney(0)) { 
+                                if (Integer.parseInt(raiseOpt) == table.seeMoney(0)) {
                                     System.out.println("All in!");
+
+                                    table.revealCard(5);
+
+                                    table.addBet(0, Integer.parseInt(raiseOpt));
+                                    table.addBet(1, Integer.parseInt(raiseOpt));
+
                                     RaiseCallFoldOptions = false;
                                     states = gameState.SHOWDOWN;
 
                                     // handles normal situations where the player bets money that is within the player money amount.
                                 } else {
-                                    table.addBet(0, Integer.parseInt(raiseOpt)); 
+                                    table.addBet(0, Integer.parseInt(raiseOpt));
                                     table.addBet(1, Integer.parseInt(raiseOpt));
                                     System.out.println("Player 2 called!"); // reactionary AI for the 2nd player
                                     RaiseCallFoldOptions = false;
@@ -130,9 +141,10 @@ public class Main {
                                 break;
                         }
                     }
+                    break;
 
                 case FLOP:
-                    table.revealCard(3);
+                    table.updateRanking();
                     System.out.println("Bet: " + (table.seeBet(0) + table.seeBet(1)));
                     System.out.println("Your money: " + table.seeMoney(0));
                     System.out.println("Opponent's money: " + table.seeMoney(1));
@@ -140,6 +152,7 @@ public class Main {
                     System.out.println(" ");
 
                     System.out.println("Table cards: ");
+                    table.revealCard(3);
                     System.out.println(table.seeTable());
 
                     System.out.println(" ");
@@ -200,8 +213,10 @@ public class Main {
                                 break;
                         }
                     }
+                    break;
 
                 case TURN:
+                    table.updateRanking();
                     table.revealCard(1);
                     System.out.println("Bet: " + (table.seeBet(0) + table.seeBet(1)));
                     System.out.println("Your money: " + table.seeMoney(0));
@@ -245,14 +260,15 @@ public class Main {
                                     table.addBet(1, Integer.parseInt(raiseOpt));
                                     System.out.println("Player 2 called!");
                                     RaiseCallFoldOptionsTurn = false;
-                                    states = gameState.SHOWDOWN;
+                                    table.revealCard(2);
+                                    states = gameState.RIVER;
                                 }
                                 break;
 
 
                             case "2":
                                 RaiseCallFoldOptionsTurn = false;
-                                states = gameState.SHOWDOWN;
+                                states = gameState.RIVER;
                                 break;
 
 
@@ -271,7 +287,10 @@ public class Main {
                         }
                     }
 
+                    break;
+
                 case RIVER:
+                    table.updateRanking();
                     table.revealCard(1);
                     System.out.println("Bet: " + (table.seeBet(0) + table.seeBet(1)));
                     System.out.println("Your money: " + table.seeMoney(0));
@@ -315,14 +334,14 @@ public class Main {
                                     table.addBet(1, Integer.parseInt(raiseOpt));
                                     System.out.println("Player 2 called!");
                                     RaiseCallFoldOptionsRiver = false;
-                                    states = gameState.RIVER;
+                                    states = gameState.SHOWDOWN;
                                 }
                                 break;
 
 
                             case "2":
                                 RaiseCallFoldOptionsRiver = false;
-                                states = gameState.RIVER;
+                                states = gameState.SHOWDOWN;
                                 break;
 
 
@@ -341,9 +360,38 @@ public class Main {
                         }
                     }
 
-                case SHOWDOWN:
+                    break;
 
-                case WINNER:
+                case SHOWDOWN:
+                    table.updateRanking();
+                    System.out.println("Your money: " + table.seeMoney(0));
+                    System.out.println("Opponent's money: " + table.seeMoney(1));
+
+                    System.out.println(" ");
+
+                    System.out.println("Table cards: ");
+                    System.out.println(table.seeTable());
+
+                    System.out.println(" ");
+
+                    System.out.println("Your cards: ");
+                    System.out.println(table.seeHand(0));
+
+                    System.out.println(" ");
+                    System.out.println("Opponent cards");
+                    System.out.println(table.seeHand(1));
+
+                    if(table.winner() == 0){
+                        System.out.println("Winner is player 1!");
+                        table.addMoney(0, (table.seeBet(0) + table.seeBet(1)));
+                        states = gameState.NEW_GAME;
+                    }
+                    if(table.winner() == 1) {
+                        System.out.println("Winner is player 2!");
+                        table.addMoney(1, (table.seeBet(0) + table.seeBet(1)));
+                        states = gameState.NEW_GAME;
+                    }
+                    break;
 
                 case NEW_GAME:
                     System.out.println("[1]Quit [2]Play Again");
@@ -355,13 +403,30 @@ public class Main {
                             break;
 
                         case "2":
-                            table.resetBet();
-                            table.removeCard(0);
-                            table.removeCard(1);
-                            states = gameState.PREFLOP;
-                            break;
-                    }
 
+                            String loser;
+
+                            if(table.winner() == 1){
+                                loser = Integer.toString(0);
+                            } else {
+                                loser = Integer.toString(1);
+                            }
+
+                            if(table.seeMoney(0) > 5){
+                                table.resetBet();
+                                table.removeCard(0);
+                                table.removeCard(1);
+                                table.resetDeck();
+                                states = gameState.PREFLOP;
+                                break;
+                            } else {
+                                System.out.println("Player " + loser + "can't continue");
+                                states = gameState.IDLE;
+                                break;
+                            }
+
+                    }
+                    break;
             }
         }
     }
