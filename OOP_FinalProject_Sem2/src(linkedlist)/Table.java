@@ -102,10 +102,10 @@ public class Table {
     }
 
     //see hand
-    public ArrayList<String> seeHand(int player) {
+    public LinkedList<String> seeHand(int player) {
         return players[player].getHand();
     }
-    public ArrayList<String> seeTable() {
+    public LinkedList<String> seeTable() {
         return publicCard.getHand();
     }
 
