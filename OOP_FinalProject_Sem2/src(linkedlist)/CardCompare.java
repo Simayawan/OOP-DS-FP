@@ -1,13 +1,14 @@
-import java.util.ArrayList;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class CardCompare {
-    private ArrayList<String> p1 = new ArrayList<>();
-    private ArrayList<String> p2 = new ArrayList<>();
+    private LinkedList<String> p1 = new LinkedList<>();
+    private LinkedList<String> p2 = new LinkedList<>();
 
     //constructor
-    public CardCompare(ArrayList<String> p1, ArrayList<String> p2, ArrayList<String> table) {
+    public CardCompare(LinkedList<String> p1, LinkedList<String> p2, LinkedList<String> table) {
         this.p1 = p1;
         this.p1.addAll(table);
         this.p2 = p2;
@@ -49,8 +50,8 @@ public class CardCompare {
         result[1] = valueDecode(split[1]);
         return result;
     }
-    private List<int[]> decodeHand(ArrayList<String> hand) {
-        List<int[]> decoded = new ArrayList<>();
+    private List<int[]> decodeHand(LinkedList<String> hand) {
+        List<int[]> decoded = new LinkedList<>();
         for (String card : hand) {
             decoded.add(cardDecoder(card));
         }
@@ -102,7 +103,7 @@ public class CardCompare {
     }
     private boolean straight(List<int[]> hand) {
         //make list of unique value
-        List<Integer> value = new ArrayList<>();
+        List<Integer> value = new LinkedList<>();
         for (int[] i : hand) {
             int temp = i[1];
             if (!value.contains(temp)) {
@@ -175,11 +176,11 @@ public class CardCompare {
     }
     private boolean royalFlush(List<int[]> hand) {
         if (straightFlush(hand)) {
-            List<Integer> cardValue = new ArrayList<>();
+            List<Integer> cardValue = new LinkedList<>();
             for (int[] i : hand) {
                 cardValue.add(i[1]);
             }
-            List<Integer> check = new ArrayList<>() {
+            List<Integer> check = new LinkedList<>() {
                 {
                     add(10);
                     add(11);
