@@ -6,6 +6,6 @@
 
 <h1> How to Play </h1>
 <p>
-  Step 1: download extract the src file for either the Linkedlist or the Arraylist version of the game./n
+  Step 1: download extract the src file for either the Linkedlist or the Arraylist version of the game.\n
   Step 2: find a file called "Main" and run it 
 </p>
