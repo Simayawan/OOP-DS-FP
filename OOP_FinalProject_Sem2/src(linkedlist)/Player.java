@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+
+import java.util.LinkedList;
 
 public class Player{
     private boolean fold;
@@ -67,10 +68,10 @@ public class Player{
     }
 
     //interact with hand
-    public ArrayList<String> getHand() {
+    public LinkedList<String> getHand() {
         return hand.getHand();
     }
-    public void addCard(ArrayList<String> cards) {
+    public void addCard(LinkedList<String> cards) {
         this.hand.addCard(cards);
     }
     public void addCard(String card) {
