@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Deck {
     //initialize
-    private ArrayList<String> currentDeck = new ArrayList<String>();
+    private LinkedList<String> currentDeck = new LinkedList<>();
     private final String[] deck = {"cb|2","cb|3","cb|4","cb|5","cb|6","cb|7","cb|8","cb|9","cb|10","cb|J","cb|Q","cb|K","cb|A",//club
             "ht|2","ht|3","ht|4","ht|5","ht|6","ht|7","ht|8","ht|9","ht|10","ht|J","ht|Q","ht|K","ht|A",//heart
             "sp|2","sp|3","sp|4","sp|5","sp|6","sp|7","sp|8","sp|9","sp|10","sp|J","sp|Q","sp|K","sp|A",//spade
@@ -14,7 +14,7 @@ public class Deck {
         this.shuffle();
     }
     //getter
-    public ArrayList<String> getDeck() {
+    public LinkedList<String> getDeck() {
         return currentDeck;
     }
     //printing deck
@@ -36,8 +36,8 @@ public class Deck {
         this.remove(drawnCard);
         return drawnCard;
     }
-    public ArrayList<String> draw(int numOfCard){ //draw x number of card
-        ArrayList<String> temp = new ArrayList<String>();
+    public LinkedList<String> draw(int numOfCard){ //draw x number of card
+        LinkedList<String> temp = new LinkedList<>();
         for (int i=0; i<numOfCard ; i++) {
             temp.add(draw());
         }
