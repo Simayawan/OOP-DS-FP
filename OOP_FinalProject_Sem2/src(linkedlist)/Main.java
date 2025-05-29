@@ -143,7 +143,7 @@ public class Main {
                         }
                     }
                     break;
-
+                // same format as PREFLOP=
                 case FLOP:
                     table.updateRanking();
                     System.out.println("Bet: " + (table.seeBet(0) + table.seeBet(1)));
@@ -215,7 +215,7 @@ public class Main {
                         }
                     }
                     break;
-
+                // same format as PREFLOP
                 case TURN:
                     table.updateRanking();
                     table.revealCard(1);
@@ -288,7 +288,7 @@ public class Main {
                     }
 
                     break;
-
+                // same format as PREFLOP
                 case RIVER:
                     table.updateRanking();
                     table.revealCard(1);
@@ -361,7 +361,7 @@ public class Main {
                     }
 
                     break;
-
+                // SHOWDOWN State
                 case SHOWDOWN:
                     table.updateRanking();
                     System.out.println("Your money: " + table.seeMoney(0));
@@ -381,20 +381,20 @@ public class Main {
                     System.out.println("Opponent cards");
                     System.out.println(table.seeHand(1));
 
-                    if(table.winner() == 0){
+                    if(table.winner() == 0){ // if player 1 (you) wins, the total bet will all go to player 1
                         System.out.println("Winner is player 1!");
                         table.addMoney(0, (table.seeBet(0) + table.seeBet(1)));
                         states = gameState.NEW_GAME;
                         break;
                     }
-                    if(table.winner() == 1) {
+                    if(table.winner() == 1) { // if player 2 wins, the total bet will all go to player 2
                         System.out.println("Winner is player 2!");
                         table.addMoney(1, (table.seeBet(0) + table.seeBet(1)));
                         states = gameState.NEW_GAME;
                         break;
                     }
 
-                    if(table.winner() == 2) {
+                    if(table.winner() == 2) { // handles a tie, where the last bet will all be given back to each player
                         System.out.println("it's a tie!");
                         table.addMoney(1, table.seeBet(1));
                         table.addMoney(0, table.seeBet(0));
@@ -402,12 +402,12 @@ public class Main {
                         break;
                     }
                     break;
-
+                // a state which handles when a game is over
                 case NEW_GAME:
                     System.out.println("[1]Quit [2]Play Again");
                     String QuitPlayOption = scr.nextLine();
 
-                    switch(QuitPlayOption){
+                    switch(QuitPlayOption){ // switch case to handle the choice of either playing again or quitting
                         case "1":
                             gameRunning = false;
                             break;
@@ -422,7 +422,7 @@ public class Main {
                                 loser = Integer.toString(1);
                             }
 
-                            if(table.seeMoney(0) > 5 && table.seeMoney(1) > 5){
+                            if(table.seeMoney(0) > 5 && table.seeMoney(1) > 5){ // handles the situation where one or both players dont have enough money to continue
                                 table.resetBet();
                                 table.removeCard(0);
                                 table.removeCard(1);
@@ -430,7 +430,7 @@ public class Main {
                                 table.resetDeck();
                                 states = gameState.PREFLOP;
                                 break;
-                            } else {
+                            } else { // ends the session entirely if one player don't have enough money to continue
                                 System.out.println("Player " + loser + " can't continue");
                                 System.out.println("Session ending...");
                                 gameRunning = false;
