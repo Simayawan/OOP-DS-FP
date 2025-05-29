@@ -12,7 +12,7 @@ enum gameState{ // To represent game states
     RIVER, // fourth round of betting with the final card being reveled
     SHOWDOWN, // the final round where the player and the opponent cards are compared to the table hand
     NEW_GAME, // gives 2 choices, to play again or to quit, but both resets every value to give a clean slate for another game.
-    NEW_GAME_ALL_IN
+
 }
 
 public class Main {
@@ -29,7 +29,8 @@ public class Main {
 
 
         while(gameRunning){ //while loop for the entire game
-            switch(states) { //switch case to handle each game state
+            switch(states) {
+                //switch case to handle each game state
 
                 case IDLE:
 
@@ -260,7 +261,6 @@ public class Main {
                                     table.addBet(1, Integer.parseInt(raiseOpt));
                                     System.out.println("Player 2 called!");
                                     RaiseCallFoldOptionsTurn = false;
-                                    table.revealCard(2);
                                     states = gameState.RIVER;
                                 }
                                 break;
@@ -385,11 +385,21 @@ public class Main {
                         System.out.println("Winner is player 1!");
                         table.addMoney(0, (table.seeBet(0) + table.seeBet(1)));
                         states = gameState.NEW_GAME;
+                        break;
                     }
                     if(table.winner() == 1) {
                         System.out.println("Winner is player 2!");
                         table.addMoney(1, (table.seeBet(0) + table.seeBet(1)));
                         states = gameState.NEW_GAME;
+                        break;
+                    }
+
+                    if(table.winner() == 2) {
+                        System.out.println("it's a tie!");
+                        table.addMoney(1, table.seeBet(1));
+                        table.addMoney(0, table.seeBet(0));
+                        states = gameState.NEW_GAME;
+                        break;
                     }
                     break;
 
@@ -412,16 +422,18 @@ public class Main {
                                 loser = Integer.toString(1);
                             }
 
-                            if(table.seeMoney(0) > 5){
+                            if(table.seeMoney(0) > 5 && table.seeMoney(1) > 5){
                                 table.resetBet();
                                 table.removeCard(0);
                                 table.removeCard(1);
+                                table.clearTable();
                                 table.resetDeck();
                                 states = gameState.PREFLOP;
                                 break;
                             } else {
-                                System.out.println("Player " + loser + "can't continue");
-                                states = gameState.IDLE;
+                                System.out.println("Player " + loser + " can't continue");
+                                System.out.println("Session ending...");
+                                gameRunning = false;
                                 break;
                             }
 
