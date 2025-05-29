@@ -1,8 +1,9 @@
-import java.util.ArrayList;
+
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class Hand {
-    private ArrayList<String> currentHand = new ArrayList<>();
+    private LinkedList<String> currentHand = new LinkedList<>();
     private int numOfCard;
     public Hand() {
         this.numOfCard = 0;
@@ -16,7 +17,7 @@ public class Hand {
     }
 
     //getter
-    public ArrayList<String> getHand() {
+    public LinkedList<String> getHand() {
         return this.currentHand;
     }
 
@@ -25,7 +26,7 @@ public class Hand {
         this.currentHand.add(card);
         this.numOfCard += 1;
     }
-    public void addCard(ArrayList<String> card){
+    public void addCard(LinkedList<String> card){
         this.currentHand.addAll(card);
         this.numOfCard += card.size();
     }
