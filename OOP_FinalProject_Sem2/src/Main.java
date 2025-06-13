@@ -445,6 +445,8 @@ public class Main {
                         break;
                 }
             }
+
+            // code for testing the memory usage and run time
             System.out.println("Memory usage of Table class:");
             MemoryInspector.printMemoryUsage(table);
         });
