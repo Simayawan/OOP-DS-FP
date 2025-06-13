@@ -54,7 +54,7 @@ public class Hand {
     }
     public void resetHand() {
         if (!this.currentHand.isEmpty()) {
-            this.currentHand.removeAll(this.currentHand);
+            this.currentHand.clear();
             this.numOfCard = 0;
         }
     }
